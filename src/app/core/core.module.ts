@@ -7,10 +7,16 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { loadSvgResources } from '../utils/svg.utils';
+
 @NgModule({
   imports: [
     SharedModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
   exports: [
     HeaderComponent,
@@ -21,9 +27,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   declarations: [HeaderComponent, FooterComponent, SidebarComponent]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parent: CoreModule) {
+  constructor(
+    @Optional() @SkipSelf() parent: CoreModule,
+    ir: MatIconRegistry,
+    ds: DomSanitizer,
+  ) {
     if (parent) {
       throw new Error('Core module already exists.');
     }
+    loadSvgResources(ir, ds);
   }
 }
