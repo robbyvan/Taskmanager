@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+// @import 'theme.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body, app-root, mat-sidenav-container, .site {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: #000;
+}
