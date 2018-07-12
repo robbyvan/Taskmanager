@@ -9,6 +9,7 @@ import {
   MatInputModule,
   MatListModule,
   MatSlideToggleModule,
+  MatGridListModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatSlideToggleModule,
+    MatGridListModule,
   ],
   exports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatSlideToggleModule,
+    MatGridListModule,
   ],
   declarations: []
 })
