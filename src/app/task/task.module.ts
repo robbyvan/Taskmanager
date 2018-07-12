@@ -25,7 +25,8 @@ import { NewTaskListComponent } from './new-task-list/new-task-list.component';
   ],
   entryComponents:[
     NewTaskComponent,
-    CopyTaskComponent
+    CopyTaskComponent,
+    NewTaskListComponent,
   ],
 })
 export class TaskModule { }

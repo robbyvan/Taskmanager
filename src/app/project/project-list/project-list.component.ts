@@ -39,11 +39,11 @@ export class ProjectListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewProjectComponent, { data: { title: 'New Project' } });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.projects = [
-        ...this.projects, 
-        { id: 3, name: 'A new Project', desc: 'This is a new project', coverImg: "assets/img/covers/8.jpg"},
-        { id: 4, name: 'Another Project', desc: 'This is another project', coverImg: "assets/img/covers/9.jpg"},
-      ];
+      // this.projects = [
+      //   ...this.projects, 
+      //   { id: 3, name: 'A new Project', desc: 'This is a new project', coverImg: "assets/img/covers/8.jpg"},
+      //   { id: 4, name: 'Another Project', desc: 'This is another project', coverImg: "assets/img/covers/9.jpg"},
+      // ];
     });
   }
 
@@ -59,9 +59,9 @@ export class ProjectListComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: {title: '删除项目', content: '确认删除此项目吗?'} });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.projects = this.projects.filter(p => p.id !== project.id);
+      // this.projects = this.projects.filter(p => p.id !== project.id);
     });
-    this.cd.markForCheck();
+    // this.cd.markForCheck();
   }
   
 }
