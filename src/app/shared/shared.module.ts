@@ -13,6 +13,8 @@ import {
   MatDialogModule,
   MatAutocompleteModule,
   MatMenuModule,
+  MatCheckboxModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,6 +37,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ReactiveFormsModule,
     FormsModule,
     MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
   ],
   exports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ReactiveFormsModule,
     FormsModule,
     MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
   ],
   entryComponents: [
     ConfirmDialogComponent,

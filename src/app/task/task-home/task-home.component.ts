@@ -72,4 +72,8 @@ export class TaskHomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  openTaskClickDialog(task) {
+    const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: 'Edit Task', task: task } });
+  }
+
 }
