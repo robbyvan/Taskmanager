@@ -10,9 +10,12 @@ import {
   MatListModule,
   MatSlideToggleModule,
   MatGridListModule,
+  MatDialogModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -26,6 +29,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     CommonModule,
@@ -38,7 +45,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  declarations: []
+  entryComponents: [
+    ConfirmDialogComponent,
+  ],
+  declarations: [ConfirmDialogComponent],
 })
 export class SharedModule { }
