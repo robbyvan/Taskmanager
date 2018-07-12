@@ -1,6 +1,8 @@
 import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NewTaskComponent } from '../new-task/new-task.component';
+import { CopyTaskComponent } from '../copy-task/copy-task.component';
+import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 
 @Component({
   selector: 'app-task-home',
@@ -80,6 +82,15 @@ export class TaskHomeComponent implements OnInit {
 
   openNewTaskDialog() {
     const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: '新任务' } });
+  }
+
+  openCopyTaskDialog() {
+    const dialogRef = this.dialog.open(CopyTaskComponent, { data: { lists: this.lists } });
+  }
+
+  openEditListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: 'Edit Task List' } });
+    dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 
 }

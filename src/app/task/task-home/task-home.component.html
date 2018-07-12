@@ -6,6 +6,8 @@
     <app-task-header
       [header]="list.name"
       (newTask)="openNewTaskDialog()"
+      (moveAll)="openCopyTaskDialog()"
+      (editList)="openEditListDialog()"
     ></app-task-header>
     <app-task-item
       *ngFor="let task of list.tasks"
