@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-// import { OverlayContainer } from '@angular/cdk/overlay'
 
 @Component({
   selector: 'app-new-project',

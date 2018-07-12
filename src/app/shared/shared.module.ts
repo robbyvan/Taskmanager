@@ -12,6 +12,7 @@ import {
   MatGridListModule,
   MatDialogModule,
   MatAutocompleteModule,
+  MatMenuModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -33,6 +34,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatAutocompleteModule,
     ReactiveFormsModule,
     FormsModule,
+    MatMenuModule,
   ],
   exports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatAutocompleteModule,
     ReactiveFormsModule,
     FormsModule,
+    MatMenuModule,
   ],
   entryComponents: [
     ConfirmDialogComponent,
