@@ -15,6 +15,10 @@ import {
   MatMenuModule,
   MatCheckboxModule,
   MatTooltipModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatRadioModule,
+  MatSelectModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -39,6 +43,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatMenuModule,
     MatCheckboxModule,
     MatTooltipModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSelectModule,
   ],
   exports: [
     CommonModule,
@@ -58,6 +66,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatMenuModule,
     MatCheckboxModule,
     MatTooltipModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSelectModule,
   ],
   entryComponents: [
     ConfirmDialogComponent,

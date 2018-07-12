@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { NewTaskComponent } from '../new-task/new-task.component';
 
 @Component({
   selector: 'app-task-home',
@@ -67,13 +69,17 @@ export class TaskHomeComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
 
   openTaskClickDialog(task) {
-    const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: 'Edit Task', task: task } });
+    const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: '编辑任务', task: task } });
+  }
+
+  openNewTaskDialog() {
+    const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: '新任务' } });
   }
 
 }
