@@ -11,6 +11,7 @@ import { listAnimation } from '../../anims/list.anim';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
   animations: [slideToRight, listAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent implements OnInit {
 
@@ -49,7 +50,8 @@ export class ProjectListComponent implements OnInit {
         { id: 3, name: 'A new Project', desc: 'This is a new project', coverImg: "assets/img/covers/8.jpg"},
         { id: 4, name: 'Another Project', desc: 'This is another project', coverImg: "assets/img/covers/9.jpg"},
       ];
-    });
+    this.cd.markForCheck();
+    });    
   }
 
   openEditProjectDialog(project) {
@@ -65,8 +67,8 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.projects = this.projects.filter(p => p.id !== project.id);
+      this.cd.markForCheck();
     });
-    // this.cd.markForCheck();
   }
   
 }

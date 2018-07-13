@@ -8,7 +8,7 @@ import { itemAnim } from '../../anims/item.anim';
   animations:[
     itemAnim
   ],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskItemComponent implements OnInit {
 

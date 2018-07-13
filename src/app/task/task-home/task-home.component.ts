@@ -11,6 +11,7 @@ import { slideToRight } from '../../anims/router.anim';
   templateUrl: './task-home.component.html',
   styleUrls: ['./task-home.component.scss'],
   animations: [slideToRight],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskHomeComponent implements OnInit {
 
@@ -76,7 +77,10 @@ export class TaskHomeComponent implements OnInit {
     },
   ]
 
-  constructor(private dialog: MatDialog, private cd: ChangeDetectorRef) { }
+  constructor(
+    private dialog: MatDialog,
+    private cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
   }
@@ -100,7 +104,10 @@ export class TaskHomeComponent implements OnInit {
   /*修改任务列表*/
   openEditListDialog() {
     const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '修改任务列表' } });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.cd.markForCheck();
+    });
   }
 
   /*移动列表所有任务*/
@@ -111,7 +118,10 @@ export class TaskHomeComponent implements OnInit {
   /*删除列表*/
   openConfirmDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { title: '移除', content: '确认删除当前任务列表吗?'} });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.cd.markForCheck();
+    });
   }
 
 }

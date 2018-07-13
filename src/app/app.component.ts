@@ -10,9 +10,7 @@ export class AppComponent {
 
   darkTheme = false;
   
-  constructor(private oc: OverlayContainer, @Inject('BASE_CONFIG') config) {
-    console.log(config);
-  }
+  constructor(private oc: OverlayContainer) {}
 
   switchTheme(dark) {
     this.darkTheme = dark.checked;
