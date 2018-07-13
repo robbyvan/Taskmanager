@@ -28,7 +28,10 @@ import { AppRoutingModule } from '../app-routing.module';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  declarations: [HeaderComponent, FooterComponent, SidebarComponent]
+  declarations: [HeaderComponent, FooterComponent, SidebarComponent],
+  providers: [
+    { provide: 'BASE_CONFIG', useValue: 'http://localhost:3000' }
+  ]
 })
 export class CoreModule {
   constructor(
