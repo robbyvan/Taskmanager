@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ChangeDetectionStrategy } from '@angular/core';
-// import { itemAnim } from '../../anims/item.anim';
+import { itemAnim } from '../../anims/item.anim';
 
 @Component({
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.scss'],
-  // animations:[
-    // itemAnim
-  // ],
+  animations:[
+    itemAnim
+  ],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskItemComponent implements OnInit {
@@ -24,6 +24,16 @@ export class TaskItemComponent implements OnInit {
     this.avatar = this.item.owner ? this.item.owner.avatar : 'unassigned';
   }
 
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.widerPriority = 'in';
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.widerPriority = 'out';
+  }
+
   onItemClick() {
     this.taskClick.emit();
   }
@@ -31,15 +41,5 @@ export class TaskItemComponent implements OnInit {
   onCheckBoxClick(e: Event) {
     e.stopPropagation();
   }
-
-  // @HostListener('mouseenter')
-  // onMouseEnter() {
-  //   this.widerPriority = 'in';
-  // }
-
-  // @HostListener('mouseleave')
-  // onMouseLeave() {
-  //   this.widerPriority = 'out';
-  // }
 
 }
