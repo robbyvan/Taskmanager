@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="loginForm" (submit)="onSubmit(loginForm, $event)" >
   <mat-card class="card-login">
     <mat-card-header>
       <mat-card-title>登录</mat-card-title>
@@ -6,13 +6,14 @@
 
     <mat-card-content>
       <mat-form-field color="accent" class="full-width">
-        <input matInput type="text" placeholder="请输入邮箱地址" />
+        <input matInput type="text" placeholder="请输入邮箱地址" formControlName="email" />
+        <mat-error>{{ loginForm.controls['email'].errors | json }}</mat-error>
       </mat-form-field>
 
       <mat-form-field color="accent" class="full-width">
-        <input matInput type="text" placeholder="请输入密码" />
+        <input matInput type="text" placeholder="请输入密码" formControlName="password" />
       </mat-form-field>
-      <button mat-raised-button type="button" color="accent">登录</button>
+      <button mat-raised-button type="submit" color="accent">登录</button>
     </mat-card-content>
 
     <mat-card-actions class="text-right ">
