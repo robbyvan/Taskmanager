@@ -14,6 +14,8 @@ import { loadSvgResources } from '../utils/svg.utils';
 
 import { AppRoutingModule } from '../app-routing.module';
 
+import { take } from 'rxjs/operators';
+
 @NgModule({
   imports: [
     SharedModule,

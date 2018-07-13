@@ -6,6 +6,10 @@
     'priority-emergency' : item.priority === 1
   }"
   [@item]='widerPriority'
+  [appDraggable]="true"
+  [dragTag]="'task-item'"
+  [draggedClass]="'drag-start'"
+  [dragData]="item"
   (click)="onItemClick()"
 >
   <mat-checkbox
