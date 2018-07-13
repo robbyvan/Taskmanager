@@ -1,12 +1,14 @@
-<app-project-item
-  class="card"
-  *ngFor="let project of projects"
-  [item]="project"
-  (onEditProject)="openEditProjectDialog(project)"
-  (onInvite)="openInviteDialog()"
-  (onDelProject)="openConfirmDialog(project)"
->
-</app-project-item>
+<div class="container" [@listAnim]="projects.length">
+  <app-project-item
+    class="card"
+    *ngFor="let project of projects"
+    [item]="project"
+    (onEditProject)="openEditProjectDialog(project)"
+    (onInvite)="openInviteDialog()"
+    (onDelProject)="openConfirmDialog(project)"
+  >
+  </app-project-item>
+</div>
 
 <button
   class="fab-button"

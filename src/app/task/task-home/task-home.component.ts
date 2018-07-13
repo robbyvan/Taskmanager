@@ -4,13 +4,17 @@ import { NewTaskComponent } from '../new-task/new-task.component';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { slideToRight } from '../../anims/router.anim';
 
 @Component({
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
-  styleUrls: ['./task-home.component.scss']
+  styleUrls: ['./task-home.component.scss'],
+  animations: [slideToRight],
 })
 export class TaskHomeComponent implements OnInit {
+
+  @HostBinding('@routeAnim') state;
 
   lists = [
     {

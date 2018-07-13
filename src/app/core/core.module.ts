@@ -12,17 +12,21 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { loadSvgResources } from '../utils/svg.utils';
 
+import { AppRoutingModule } from '../app-routing.module';
+
 @NgModule({
   imports: [
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
     BrowserAnimationsModule,
+    AppRoutingModule
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent]
 })
