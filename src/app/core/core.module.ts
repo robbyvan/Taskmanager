@@ -10,13 +10,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { loadSvgResources } from '../utils/svg.utils';
 
 import { AppRoutingModule } from '../app-routing.module';
 
 import { take } from 'rxjs/operators';
 
-// import { ServicesModule } from '../services/services.module';
+import { ServicesModule } from '../services/services.module';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { take } from 'rxjs/operators';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    // ServicesModule.forRoot(),
+    ServicesModule.forRoot(),
+    HttpModule,
   ],
   exports: [
     HeaderComponent,
@@ -35,7 +37,11 @@ import { take } from 'rxjs/operators';
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   providers: [
-    // { provide: 'BASE_CONFIG', useValue: 'http://localhost:3000' }
+    { provide: 'BASE_CONFIG',
+      useValue: {
+        uri: 'http://localhost:3000',
+      }
+    }
   ]
 })
 export class CoreModule {

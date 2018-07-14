@@ -1,0 +1,34 @@
+{
+  "quotes": [
+    {
+      "id": "0",
+      "cn": "人人为我，我为人人。",
+      "en": "All for one, one for all.",
+      "pic": "/assets/img/quotes/0.jpg"
+    },
+    {
+      "id": "1",
+      "cn": "别人为食而生存，我为生存而食。",
+      "en": "Other men live to eat, while I eat to live.",
+      "pic": "/assets/img/quotes/1.jpg"
+    },
+    {
+      "id": "2",
+      "cn": "易得者亦易失。",
+      "en": "Easy come, easy go.",
+      "pic": "/assets/img/quotes/2.jpg"
+    },
+    {
+      "id": "3",
+      "cn": "欲望中的东西，我们很快就信以为真。",
+      "en": "We soon believe what we desire.",
+      "pic": "/assets/img/quotes/3.jpg"
+    },
+    {
+      "id": "4",
+      "cn": "黎明前的时分是最黑暗的。",
+      "en": "The darkest hour is that before the dawn.",
+      "pic": "/assets/img/quotes/4.jpg"
+    }
+  ]
+}
