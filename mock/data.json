@@ -1,4 +1,20 @@
 {
+  "projects": [
+    {
+      "id": "1",
+      "name": "企业协作平台",
+      "desc": "A demo project.",
+      "coverImg": "assets/img/covers/0.jpg",
+      "members": ["1", "2"]
+    },
+    {
+      "id": "2",
+      "name": "企业协作平台",
+      "desc": "A demo project.",
+      "coverImg": "assets/img/covers/1.jpg",
+      "members": ["1"]
+    }
+  ],
   "quotes": [
     {
       "id": "0",
