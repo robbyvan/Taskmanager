@@ -2,8 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Quote } from '../domain/quote.model';
-import { map } from 'rxjs/operators';
-import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 
 

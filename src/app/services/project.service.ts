@@ -24,7 +24,6 @@ export class ProjectService {
 
   // POST
   add(project: Project): Observable<Project> {
-    project.id = null;
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http
       .post(uri, JSON.stringify(project), { headers:  this.headers })
@@ -46,7 +45,7 @@ export class ProjectService {
 
   // DELETE
   del(project: Project): Observable<Project> {
-    const delTask$ = Observable.from(project.taskLists)
+    const delTask$ = Observable.from(project.taskLists ? project.taskLists : [])
       .mergeMap(listId => this.http.delete(`${this.config.uri}/taskLists/${listId}`))
       .count();
     return delTask$
