@@ -15,7 +15,12 @@ import { loadSvgResources } from '../utils/svg.utils';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import { take } from 'rxjs/operators';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { ServicesModule } from '../services/services.module';
 import '../utils/debug.util';

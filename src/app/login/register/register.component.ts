@@ -25,11 +25,16 @@ export class RegisterComponent implements OnInit {
       password: [],
       confirmpassword: [],
       avatar: [img],
+      dateOfBirth: ['1990-01-01'],
     })
   }
 
   onSubmit({ value, valid }, e: Event) {
-
+    e.preventDefault()
+    if (!valid) {
+      return;
+    }
+    console.log(value);
   }
 
 }
