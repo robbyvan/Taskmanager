@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { User } from '../../domain/user.model';
 
 @Component({
   selector: 'app-invite',
@@ -9,32 +11,24 @@ import { FormControl } from '@angular/forms';
 })
 export class InviteComponent implements OnInit {
 
-  items = [
-    {
-      id: 1,
-      name: 'David'
-    }, {
-      id: 2,
-      name: 'Meg'
-    }, {
-      id: 3,
-      name: 'Dwight'
-    },
-  ];
-
   myControl: FormControl = new FormControl();
+  members: User[];
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data,
+    private dialogRef: MatDialogRef<InviteComponent>,
+  ) { }
 
   ngOnInit() {
+    this.members = [ ...this.data.members ];
   }
 
-  displayUser(user: { id: string; name: string}) {
-    return user ? user.name : '';
-  }
-
-  onClick() {
-    
+  onSubmit(e: Event, { value, valid }) {
+    e.preventDefault();
+    if (!valid) {
+      return;
+    }
+    this.dialogRef.close(this.members);
   }
 
 }

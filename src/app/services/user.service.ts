@@ -17,7 +17,7 @@ export class UserService {
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http
       .get(uri, { params: { 'email_like': filter } })
-      .map(res => res.json() as User[])
+      .map(res => res.json() as User[]);
   }
 
   getUsersByProject(projectId: string): Observable<User[]> {

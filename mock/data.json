@@ -42,6 +42,19 @@
       "roleIds": [
         1
       ]
+    },
+    {
+      "password": "Lw12345",
+      "name": "李五",
+      "avatar": "avatars:svg-3",
+      "email": "liwu@163.com",
+      "id": "BkkDvwae-",
+      "projectIds": [
+        "Sk2HaTaeh"
+      ],
+      "roleIds": [
+        2
+      ]
     }
   ],
   "projects": [

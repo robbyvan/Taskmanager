@@ -82,7 +82,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
 
   openInviteDialog() {
-    const dialogRef = this.dialog.open(InviteComponent);
+    const dialogRef = this.dialog.open(InviteComponent, { data: { members: [] }});
   }
 
   openConfirmDialog(project) {

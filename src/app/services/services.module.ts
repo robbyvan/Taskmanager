@@ -18,6 +18,7 @@ export class ServicesModule {
         ProjectService,
         TaskListService,
         TaskService,
+        UserService,
         AuthService,
         AuthGuardService,
       ],

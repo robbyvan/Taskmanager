@@ -20,7 +20,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatButtonToggleModule,
-  // MatButtonToggleGroup,
+  MatChipsModule,
 } from '@angular/material';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -55,6 +55,7 @@ import { ChipsListComponent } from './chips-list/chips-list.component';
     MatSelectModule,
     DirectiveModule,
     MatButtonToggleModule,
+    MatChipsModule,
   ],
   exports: [
     CommonModule,
@@ -80,8 +81,10 @@ import { ChipsListComponent } from './chips-list/chips-list.component';
     MatSelectModule,
     DirectiveModule,
     MatButtonToggleModule,
+    MatChipsModule,
     ImageListSelectComponent,
     AgeInputComponent,
+    ChipsListComponent,
   ],
   entryComponents: [
     ConfirmDialogComponent,
@@ -90,7 +93,7 @@ import { ChipsListComponent } from './chips-list/chips-list.component';
     ConfirmDialogComponent,
     ImageListSelectComponent,
     AgeInputComponent,
-    ChipsListComponent
+    ChipsListComponent,
   ],
 })
 export class SharedModule { }
