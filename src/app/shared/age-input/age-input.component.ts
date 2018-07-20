@@ -1,5 +1,12 @@
 import { Component, OnInit, Input, forwardRef, OnDestroy } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  FormControl,
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
 
 import { combineLatest, merge } from 'rxjs';
 import { Subscription } from 'rxjs/Subscription';
@@ -135,12 +142,9 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
   private propagateChange = (_: any) => {};
 
-  onChange(i) {
-    
-  }
-
   writeValue(obj: any): void {
     if (obj) {
+      console.log('triggered', obj);
       const date = format(obj, this.format);
       this.ageForm.get('birthday').patchValue(date);
       const age = this.toAge(date);

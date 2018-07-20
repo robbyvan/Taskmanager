@@ -39,7 +39,6 @@ export class ChipsListComponent implements OnInit, ControlValueAccessor {
     });
 
     this.memberResult$ = this.chipsForm.get('memberSearch').valueChanges
-      .do(v => console.log(v))
       .debounceTime(300)
       .distinctUntilChanged()
       .filter(s => s && s.length > 1)
