@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { QuoteService } from '../../services/quote.services';
 import { Quote } from '../../domain/quote.model';
 
 import { Observable } from 'rxjs';
@@ -20,17 +19,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private quoteService$: QuoteService,
     private store$: Store<fromRoot.State>
   ) {
     this.quote$ = this.store$.select(fromRoot.getQuote);
-    this.quote$.subscribe(v => console.log(v));
-
-    this.quoteService$
-      .getQuote()
-      .subscribe(q => {
-        this.store$.dispatch(new actions.LoadSuccessAction(q));
-      });
+    this.store$.dispatch(new actions.LoadAction(null));
   }
 
   ngOnInit() {
@@ -46,10 +38,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form, e: Event) {
     e.preventDefault();
-    // console.log(form);
     const { value, valid } = form;
-    // console.log(JSON.stringify(value));
-    // console.log(JSON.stringify(valid));
   }
 
   validate(fc: FormControl): {[key: string]: any} {

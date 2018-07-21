@@ -15,6 +15,7 @@ import { loadSvgResources } from '../utils/svg.utils';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { AppStoreModule } from '../reducers';
+import { AppEffectsModule } from '../effects';
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
@@ -28,6 +29,7 @@ import 'rxjs/add/operator/count';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/from';
 
 
@@ -43,6 +45,7 @@ import '../utils/debug.util';
     ServicesModule.forRoot(),
     HttpModule,
     AppStoreModule,
+    AppEffectsModule,
   ],
   exports: [
     HeaderComponent,
@@ -50,7 +53,8 @@ import '../utils/debug.util';
     SidebarComponent,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppStoreModule,
+    // AppStoreModule,
+    // AppEffectsModule
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   providers: [
