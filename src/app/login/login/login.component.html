@@ -1,4 +1,8 @@
-<form [formGroup]="loginForm" (submit)="onSubmit(loginForm, $event)" >
+<form
+  [formGroup]="loginForm"
+  (submit)="onSubmit(loginForm, $event)"
+  *ngIf="quote$ | async; let quote"
+>
   <mat-card class="card-login">
     <mat-card-header>
       <mat-card-title>登录</mat-card-title>

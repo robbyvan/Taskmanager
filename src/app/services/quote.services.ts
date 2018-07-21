@@ -16,21 +16,21 @@ export class QuoteService {
     const uri = `${this.config.uri}/quotes/${Math.floor(Math.random() * 5)}`
     return this.http
     .get(uri)
-    .do((nextValue) => {
-         if (!environment.production) {
-           console.log(message, nextValue);
-         }
-      },
-      (err) => {
-        if (!environment.production) {
-          console.log('ERROR >> ', message, err);
-        }
-      },
-      () => {
-        if (!environment.production) {
-          console.log("completed - ", message);
-        }      
-      })
+    // .do((nextValue) => {
+    //      if (!environment.production) {
+    //        console.log(message, nextValue);
+    //      }
+    //   },
+    //   (err) => {
+    //     if (!environment.production) {
+    //       console.log('ERROR >> ', message, err);
+    //     }
+    //   },
+    //   () => {
+    //     if (!environment.production) {
+    //       console.log("completed - ", message);
+    //     }      
+    //   })
     .map(res => res.json() as Quote);
   }
 

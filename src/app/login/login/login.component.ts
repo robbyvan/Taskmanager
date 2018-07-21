@@ -3,6 +3,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { QuoteService } from '../../services/quote.services';
 import { Quote } from '../../domain/quote.model';
 
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/quote.action';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,16 +16,21 @@ import { Quote } from '../../domain/quote.model';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  quote: Quote = {
-    cn: "书籍很多, 时间却太少",
-    en: "So many books, so little time.",
-    pic: "assets/img/quote_fallback.jpg",
-  };
+  quote$: Observable<Quote>;
 
-  constructor(private fb: FormBuilder, private quoteService$: QuoteService) {
+  constructor(
+    private fb: FormBuilder,
+    private quoteService$: QuoteService,
+    private store$: Store<fromRoot.State>
+  ) {
+    this.quote$ = this.store$.select(fromRoot.getQuote);
+    this.quote$.subscribe(v => console.log(v));
+
     this.quoteService$
       .getQuote()
-      .subscribe(q => this.quote = q);
+      .subscribe(q => {
+        this.store$.dispatch(new actions.LoadSuccessAction(q));
+      });
   }
 
   ngOnInit() {
@@ -36,10 +46,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form, e: Event) {
     e.preventDefault();
-    console.log(form);
+    // console.log(form);
     const { value, valid } = form;
-    console.log(JSON.stringify(value));
-    console.log(JSON.stringify(valid));
+    // console.log(JSON.stringify(value));
+    // console.log(JSON.stringify(valid));
   }
 
   validate(fc: FormControl): {[key: string]: any} {

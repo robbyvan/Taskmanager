@@ -14,8 +14,8 @@ import { HttpModule } from '@angular/http';
 import { loadSvgResources } from '../utils/svg.utils';
 
 import { AppRoutingModule } from '../app-routing.module';
+import { AppStoreModule } from '../reducers';
 
-// import { Observable } from 'rxjs';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -42,13 +42,15 @@ import '../utils/debug.util';
     AppRoutingModule,
     ServicesModule.forRoot(),
     HttpModule,
+    AppStoreModule,
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppStoreModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   providers: [
