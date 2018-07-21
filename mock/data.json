@@ -55,6 +55,17 @@
       "roleIds": [
         2
       ]
+    },
+    {
+      "email": "van@qq.com",
+      "name": "van",
+      "password": "123",
+      "confirmpassword": "123",
+      "avatar": "avatars:svg-4",
+      "dateOfBirth": "1990-01-01",
+      "address": null,
+      "identity": null,
+      "id": "6Noo5hH"
     }
   ],
   "projects": [

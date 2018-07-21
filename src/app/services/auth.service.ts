@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  private readonly domain = 'projects';
+  private readonly domain = 'users';
   private headers = new Headers({
     'Content-Type': 'application/json'
   });
@@ -17,7 +17,6 @@ export class AuthService {
   constructor(private http: Http, @Inject('BASE_CONFIG') private config) {}
 
   register(user: User): Observable<Auth> {
-    user.id = null;
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http
       .get(uri, { params: { 'email': user.email } })

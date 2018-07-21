@@ -6,23 +6,30 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { createSelector } from 'reselect';
 
 import * as fromQuote from './quote.reducer';
+import * as fromAuth from './auth.reducer';
+import { Auth } from '../domain/auth.model';
+
 import { environment } from '../../environments/environment';
 
 
 export interface State {
   quote: fromQuote.State;
+  auth: Auth;
 };
 
 const initialState: State = {
   quote: fromQuote.initialState,
+  auth: fromAuth.initialState,
 };
 
 export const getQuoteState = (state: State) => state.quote;
+export const getAuthState = (state: State) => state.auth;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 
 export const reducers: ActionReducerMap<State> = {
   quote: fromQuote.reducer,
+  auth: fromAuth.reducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze] : [];

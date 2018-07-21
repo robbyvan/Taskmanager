@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/quote.action';
+import * as authActions from '../../actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,10 @@ export class LoginComponent implements OnInit {
   onSubmit(form, e: Event) {
     e.preventDefault();
     const { value, valid } = form;
+    if (!valid) {
+      return;
+    }
+    this.store$.dispatch(new authActions.LoginAction(value));
   }
 
   validate(fc: FormControl): {[key: string]: any} {
