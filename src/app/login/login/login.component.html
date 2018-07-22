@@ -1,7 +1,6 @@
 <form
   [formGroup]="loginForm"
   (submit)="onSubmit(loginForm, $event)"
-  *ngIf="quote$ | async; let quote"
 >
   <mat-card class="card-login">
     <mat-card-header>
@@ -32,12 +31,12 @@
         Quotes
       </mat-card-title>
       <mat-card-subtitle>
-        {{ quote.cn }}
+        {{ (quote$ | async)?.cn }}
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{ quote.pic }}" alt="quote image">
+    <img mat-card-image src="{{ (quote$ | async)?.pic }}" alt="quote image">
     <mat-card-content>
-      {{ quote.en }}
+      {{ (quote$ | async)?.en }}
     </mat-card-content>
   </mat-card>
 

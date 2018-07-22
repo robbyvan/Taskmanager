@@ -47,16 +47,16 @@ export class LoginComponent implements OnInit {
   }
 
   validate(fc: FormControl): {[key: string]: any} {
-    if (!fc.value) {
+    // if (!fc.value) {
       return null;
-    }
-    const pattern = /^van+/;
-    if (pattern.test(fc.value)) {
-      return null;
-    }
-    return {
-      emailNotValid: 'Email must start with "van"'
-    };
+    // }
+    // const pattern = /^van+/;
+    // if (pattern.test(fc.value)) {
+    //   return null;
+    // }
+    // return {
+    //   emailNotValid: 'Email must start with "van"'
+    // };
   }
 
 }

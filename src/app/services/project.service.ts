@@ -1,7 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Project } from '../domain';
+import { Project } from '../domain/project.model';
+import { User } from '../domain/user.model';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 
 @Injectable()
@@ -53,5 +55,19 @@ export class ProjectService {
       .mapTo(project);
   }
 
-
+  // INVITE
+  invite(projectId: string, users: User[]): Observable<Project> {
+    const uri = `${this.config.uri}/${this.domain}/${projectId}`;
+    return this.http
+      .get(uri)
+      .map(res => res.json())
+      .switchMap((project: Project) => {
+        const existingMembers = project.members;
+        const invitedIds = users.map(user => user.id);
+        const newIds = _.union(existingMembers, invitedIds);
+        return this.http
+          .patch(uri, JSON.stringify({ members: newIds }), { headers: this.headers })
+          .map(res => res.json())
+      });
+  }
 }

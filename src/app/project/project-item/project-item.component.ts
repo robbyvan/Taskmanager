@@ -16,10 +16,10 @@ export class ProjectItemComponent implements OnInit {
   @Output() onDelProject = new EventEmitter<void>();
   @HostBinding('@card') cardState = 'out';
   
-  constructor() { }
-
-  ngOnInit() {
+  constructor() { 
   }
+
+  ngOnInit() { }
 
   @HostListener('mouseenter')
   onMouseEnter() {

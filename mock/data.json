@@ -42,30 +42,6 @@
       "roleIds": [
         1
       ]
-    },
-    {
-      "password": "Lw12345",
-      "name": "李五",
-      "avatar": "avatars:svg-3",
-      "email": "liwu@163.com",
-      "id": "BkkDvwae-",
-      "projectIds": [
-        "Sk2HaTaeh"
-      ],
-      "roleIds": [
-        2
-      ]
-    },
-    {
-      "email": "van@qq.com",
-      "name": "van",
-      "password": "123",
-      "confirmpassword": "123",
-      "avatar": "avatars:svg-4",
-      "dateOfBirth": "1990-01-01",
-      "address": null,
-      "identity": null,
-      "id": "6Noo5hH"
     }
   ],
   "projects": [
@@ -92,12 +68,6 @@
         "BkWpk7jGZb",
         "H1fTyXjMWW"
       ]
-    },
-    {
-      "name": "a",
-      "desc": null,
-      "coverImg": "/assets/img/covers/3.jpg",
-      "id": "ufTKgGi"
     }
   ],
   "taskLists": [

@@ -10,10 +10,6 @@ import { Auth } from '../domain/auth.model';
 import { User } from '../domain/user.model';
 import  * as routerActions from '../actions/router.action';
 
-export const GO = '[Router] Go';
-export const BACK = '[Router] Back';
-export const FORWARD = '[Router] Forward';
-
 @Injectable()
 export class AuthEffects {
   @Effect()

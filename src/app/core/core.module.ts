@@ -31,6 +31,7 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/concat';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/defaultIfEmpty';
+import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/observable/from';
 
 
