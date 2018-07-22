@@ -1,10 +1,19 @@
 import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { slideToRight } from '../../anims/router.anim';
+
+import { TaskList } from '../../domain/task-list.model';
+import * as fromRoot from '../../reducers';
+import * as taskListActions from '../../actions/task-list.action';
+
 
 @Component({
   selector: 'app-task-home',
@@ -16,71 +25,18 @@ import { slideToRight } from '../../anims/router.anim';
 export class TaskHomeComponent implements OnInit {
 
   @HostBinding('@routeAnim') state;
-
-  lists = [
-    {
-      id: 1,
-      name: '待进行',
-      order: 1,
-      tasks: [{
-        id: 1,
-        desc: 'Task 1: Buy Coffee',
-        completed: true,
-        priority: 3,
-        owner: {
-          id: 1,
-          name: 'David',
-          avatar: 'avatars:svg-13',
-        },
-        dueDate: new Date(),
-        reminder: new Date(),
-      },{
-        id: 2,
-        desc: 'Task 2: Prepare report slides',
-        completed: false,
-        priority: 1,
-        owner: {
-          id: 1,
-          name: 'Meg',
-          avatar: 'avatars:svg-12',
-        },
-        dueDate: new Date(),
-      }],
-    },
-    {
-      id: 3,
-      order: 2,
-      name: '进行中',
-      tasks: [{
-        id: 1,
-        desc: 'Task 3: Code review',
-        priority: 1,
-        completed: false,
-        owner: {
-          id: 1,
-          name: 'Dwight',
-          avatar: 'avatars:svg-13',
-        },
-        dueDate: new Date(),
-      },{
-        id: 4,
-        desc: 'Task 4: Make new task schedule',
-        completed: false,
-        priority: 2,
-        owner: {
-          id: 1,
-          name: 'Meg',
-          avatar: 'avatars:svg-12',
-        },
-        dueDate: new Date(),
-      }],
-    },
-  ]
+  projectId$: Observable<string>;
+  lists$: Observable<TaskList[]>;
 
   constructor(
     private dialog: MatDialog,
-    private cd: ChangeDetectorRef
-  ) { }
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private store$: Store<fromRoot.State>,
+  ) {
+    this.projectId$ = this.route.paramMap.pluck('id');
+    this.lists$ = this.store$.select(fromRoot.getTaskLists);
+  }
 
   ngOnInit() {
   }
@@ -96,32 +52,33 @@ export class TaskHomeComponent implements OnInit {
   }
 
   /*新建任务列表*/
-  openNewListDialog() {
+  openNewListDialog(e: Event) {
     const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '新的任务列表' } });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed()
+      .take(1)
+      .subscribe(result => this.store$.dispatch(new taskListActions.AddAction(result)));
   }
 
   /*修改任务列表*/
-  openEditListDialog() {
-    const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '修改任务列表' } });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.cd.markForCheck();
-    });
+  openEditListDialog(list: TaskList) {
+    const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '修改任务列表', taskList: list } });
+    dialogRef.afterClosed()
+      .take(1)
+      .subscribe(result => this.store$.dispatch(new taskListActions.UpdateAction({ ...result, id: list.id })));
   }
 
   /*移动列表所有任务*/
   openCopyTaskDialog() {
-    const dialogRef = this.dialog.open(CopyTaskComponent, { data: { lists: this.lists } });
+    // const dialogRef = this.dialog.open(CopyTaskComponent, { data: { lists: this.lists } });
   }
 
   /*删除列表*/
-  openConfirmDialog() {
+  openConfirmDialog(list: TaskList) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { title: '移除', content: '确认删除当前任务列表吗?'} });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.cd.markForCheck();
-    });
+    dialogRef.afterClosed()
+      .take(1)
+      .filter(n => n)
+      .subscribe(result => this.store$.dispatch(new taskListActions.DeleteAction(list)));
   }
 
   handleMove(srcData, list) {

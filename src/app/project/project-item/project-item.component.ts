@@ -14,6 +14,7 @@ export class ProjectItemComponent implements OnInit {
   @Output() onInvite = new EventEmitter<void>();
   @Output() onEditProject = new EventEmitter<void>();
   @Output() onDelProject = new EventEmitter<void>();
+  @Output() onSelected = new EventEmitter<void>();
   @HostBinding('@card') cardState = 'out';
   
   constructor() { 
@@ -21,25 +22,32 @@ export class ProjectItemComponent implements OnInit {
 
   ngOnInit() { }
 
+  onClick() {
+    this.onSelected.emit();
+  }
+
   @HostListener('mouseenter')
-  onMouseEnter() {
+  onMouseEnter(e: Event) {
     this.cardState = 'hover';
   }
 
   @HostListener('mouseleave')
-  onMouseLeave() {
+  onMouseLeave(e: Event) {
     this.cardState = 'out';
   }
 
-  onEditProjectClick() {
+  onEditProjectClick(e: Event) {
+    e.stopPropagation();
     this.onEditProject.emit();
   }
 
-  onInviteClick() {
+  onInviteClick(e: Event) {
+    e.stopPropagation();
     this.onInvite.emit();
   }
 
-  onDelProjectClick() {
+  onDelProjectClick(e: Event) {
+    e.stopPropagation();
     this.onDelProject.emit();
   }
 

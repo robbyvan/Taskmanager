@@ -1,7 +1,7 @@
 <div class="task-lists">
   <app-task-list
     class="list-container"
-    *ngFor="let list of lists"
+    *ngFor="let list of lists$ | async"
     appDroppable
     [dragEnterClass]="'drag-enter'"
     [dropTags]="['task-item', 'task-list']"
@@ -14,10 +14,10 @@
   >
     <app-task-header
       [header]="list.name"
-      (newTask)="openNewTaskDialog()"
-      (editList)="openEditListDialog()"
+      (newTask)="openNewTaskDialog($event)"
+      (editList)="openEditListDialog(list)"
       (moveAll)="openCopyTaskDialog()"
-      (delList)="openConfirmDialog()"
+      (delList)="openConfirmDialog(list)"
     ></app-task-header>
 
     <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>
@@ -35,7 +35,7 @@
   mat-fab
   class="fab-button"
   type="button"
-  (click)="openNewListDialog()"
+  (click)="openNewListDialog($event)"
 >
   <mat-icon>add</mat-icon>
 </button>

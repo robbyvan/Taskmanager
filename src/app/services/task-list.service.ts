@@ -7,7 +7,7 @@ import { concat } from 'rxjs';
 
 @Injectable()
 export class TaskListService {
-  private readonly domain = 'taskLists';
+  private readonly domain = 'taskList';
   private headers = new Headers({
     'Content-Type': 'application/json'
   });
@@ -25,7 +25,6 @@ export class TaskListService {
 
   // POST
   add(taskList: TaskList): Observable<TaskList> {
-    taskList.id = null;
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http
       .post(uri, JSON.stringify(taskList), { headers:  this.headers })
@@ -45,7 +44,7 @@ export class TaskListService {
 
   // DELETE
   del(taskList: TaskList): Observable<TaskList> {
-    const uri = `${this.config.uri}/taskLists/${taskList.id}`;
+    const uri = `${this.config.uri}/taskList/${taskList.id}`;
     return this.http
       .delete(uri)
       .mapTo(taskList);

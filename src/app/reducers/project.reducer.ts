@@ -17,7 +17,7 @@ export const initialState: State = {
 };
 
 const addProject = (state, action) => {
-  const project = (<actions.AddAction>action).payload;
+  const project = (<actions.AddSuccessAction>action).payload;
   if (state.entities[project.id]) {
     return state;
   }
@@ -27,20 +27,20 @@ const addProject = (state, action) => {
 };
 
 const updateProject = (state, action) => {
-  const project = (<actions.UpdateAction>action).payload;
+  const project = (<actions.UpdateSuccessAction>action).payload;
   const newEntities = { ...state.entities, [project.id]: project  }
   return { ...state, entities: newEntities };
 };
 
 const delProject = (state, action) => {
-  const project = (<actions.DeleteAction>action).payload;
+  const project = (<actions.DeleteSuccessAction>action).payload;
   const newIds = state.ids.filter(id => id !== project.id);
   const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: state.entities[id] }), {});
   return { ids: newIds, entities: newEntities, selectedId: null };
 };
 
 const loadProjects = (state, action) => {
-  const projects = (<actions.LoadAction>action).payload;
+  const projects = (<actions.LoadSuccessAction>action).payload;
   const incomingIds = projects.map(p => p.id);
   const newIds = _.difference(incomingIds, state.ids);
   const incomingEntities = _.chain(projects)

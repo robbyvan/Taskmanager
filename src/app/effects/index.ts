@@ -4,6 +4,7 @@ import { RouterEffects } from './router.effects';
 import { QuoteEffects } from './quote.effects';
 import { AuthEffects } from './auth.effects';
 import { ProjectEffects } from './project.effects';
+import { TaskListEffects } from './task-list.effects';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { ProjectEffects } from './project.effects';
       QuoteEffects,
       AuthEffects,
       ProjectEffects,
+      TaskListEffects,
     ]
   )],
 })

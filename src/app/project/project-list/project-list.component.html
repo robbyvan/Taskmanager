@@ -6,6 +6,7 @@
     class="card"
     *ngFor="let project of (projects$ | async)"
     [item]="project"
+    (onSelected)="selectProject(project)"
     (onEditProject)="openEditProjectDialog(project)"
     (onInvite)="openInviteDialog()"
     (onDelProject)="openConfirmDialog(project)"

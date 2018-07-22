@@ -44,6 +44,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() { }
 
+  selectProject(project: Project) {
+    this.store$.dispatch(new projectActions.SelectAction(project));
+  }
+
   openNewProjectDialog() {
     const selectedImg = `/assets/img/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
     const dialogRef = this.dialog.open(

@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     //   password: new FormControl('', Validators.required),
     // });
     this.loginForm = this.fb.group({
-      email: ['van@qq.com', Validators.compose([Validators.required, Validators.email, this.validate])],
-      password: ['', Validators.required],
+      email: ['wpcfan@163.com', Validators.compose([Validators.required, Validators.email, this.validate])],
+      password: ['wp123456', Validators.required],
     });
   }
 

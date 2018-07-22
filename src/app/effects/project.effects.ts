@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import * as projectActions from '../actions/project.action';
 import  * as routerActions from '../actions/router.action';
+import * as taskListActions from '../actions/task-list.action';
 import { ProjectService } from '../services/project.service';
 import { User } from '../domain/user.model';
 import { Project } from '../domain/project.model';
@@ -58,15 +59,21 @@ export class ProjectEffects {
     .ofType<projectActions.InviteAction>(projectActions.ActionTypes.INVITE)
     .map(a => a.payload)
     .switchMap(({ projectId, members }) => this.service$.invite(projectId, members)
-        .map(project => new projectActions.DeleteSuccessAction(project))
-        .catch(err => of(new projectActions.DeleteFailAction(JSON.stringify(err))))
+        .map(project => new projectActions.InviteSuccessAction(project))
+        .catch(err => of(new projectActions.InviteFailAction(JSON.stringify(err))))
     );
 
   @Effect()
   selectProject$: Observable<Action> = this.actions$
     .ofType<projectActions.SelectAction>(projectActions.ActionTypes.SELECT_PROJECT)
     .map(a => a.payload)
-    .map(project => new routerActions.Go({ path: [`/taskilist/${project.id}`] }));
+    .map(project => new routerActions.Go({ path: [`/tasklist/${project.id}`] }));
+
+  @Effect()
+  loadTaskList$: Observable<Action> = this.actions$
+    .ofType<projectActions.SelectAction>(projectActions.ActionTypes.SELECT_PROJECT)
+    .map(a => a.payload)
+    .map(project => new taskListActions.LoadAction(project.id));
 
   constructor(
     private actions$: Actions,
