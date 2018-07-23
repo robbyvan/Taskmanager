@@ -13,6 +13,7 @@ import { slideToRight } from '../../anims/router.anim';
 import { TaskList } from '../../domain/task-list.model';
 import * as fromRoot from '../../reducers';
 import * as taskListActions from '../../actions/task-list.action';
+import * as taskActions from '../../actions/task.action';
 
 
 @Component({
@@ -35,20 +36,28 @@ export class TaskHomeComponent implements OnInit {
     private store$: Store<fromRoot.State>,
   ) {
     this.projectId$ = this.route.paramMap.pluck('id');
-    this.lists$ = this.store$.select(fromRoot.getTaskLists);
+    this.lists$ = this.store$.select(fromRoot.getTasksByLists);
   }
 
   ngOnInit() {
   }
 
   /*新建任务*/
-  openNewTaskDialog() {
-    const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: '新任务' } });
+  openNewTaskDialog(list) {
+    const user$ = this.store$.select(fromRoot.getAuthState).map(auth => auth.user);
+    user$.take(1)
+      .map(user => this.dialog.open(NewTaskComponent, { data: { title: '新的任务', owner: user } }))
+      .switchMap(dialogRef => dialogRef.afterClosed().take(1).filter(n => n))
+      .subscribe(val => this.store$.dispatch(new taskActions.AddAction({ ...val, taskListId: list.id, completed: false, createDate: new Date() })))
   }
 
   /*修改任务(直接点击)*/
   openTaskClickDialog(task) {
     const dialogRef = this.dialog.open(NewTaskComponent, { data: { title: '编辑任务', task: task } });
+    dialogRef.afterClosed()
+      .take(1)
+      .filter(n => n)
+      .subscribe(val => this.store$.dispatch(new taskActions.UpdateAction({ ...task, ...val })));
   }
 
   /*新建任务列表*/
@@ -68,8 +77,11 @@ export class TaskHomeComponent implements OnInit {
   }
 
   /*移动列表所有任务*/
-  openCopyTaskDialog() {
-    // const dialogRef = this.dialog.open(CopyTaskComponent, { data: { lists: this.lists } });
+  openCopyTaskDialog(list) {
+    this.lists$.map(l => l.filter(n => n.id !== list.id))
+    .map(li => this.dialog.open(CopyTaskComponent, { data: { lists: li } }))
+    .switchMap(dialogRef => dialogRef.afterClosed().take(1).filter(n => n))
+    .subscribe(val => this.store$.dispatch(new taskActions.MoveAllAction({ srcListId: list.id, targetListId: val})));
   }
 
   /*删除列表*/
@@ -98,8 +110,18 @@ export class TaskHomeComponent implements OnInit {
     }
   }
 
-  handleQuickTask(desc: String) {
-    console.log(desc);
+  handleQuickTask(desc: string, list) {
+    const user$ = this.store$.select(fromRoot.getAuthState).map(auth => auth.user);
+    user$.take(1)
+      .subscribe(user => this.store$.dispatch(new taskActions.AddAction({
+        taskListId: list.id,
+        desc: desc,
+        completed: false,
+        participantsIds: [],
+        priority: 3,
+        createDate: new Date(),
+        ownerId: user.id,
+      })));
   }
 
 }

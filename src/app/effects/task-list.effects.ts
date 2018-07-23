@@ -4,8 +4,10 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
-import  * as routerActions from '../actions/router.action';
+import * as routerActions from '../actions/router.action';
 import * as taskListActions from '../actions/task-list.action';
+import * as taskActions from '../actions/task.action';
+
 import { TaskListService } from '../services/task-list.service';
 import { User } from '../domain/user.model';
 import { TaskList } from '../domain/task-list.model';
@@ -57,6 +59,12 @@ export class TaskListEffects {
         .map(taskList => new taskListActions.SwapSuccessAction(taskList))
         .catch(err => of(new taskListActions.SwapFailAction(JSON.stringify(err))))
     );
+
+  @Effect()
+  what$: Observable<Action> = this.actions$
+    .ofType<taskListActions.LoadSuccessAction>(taskListActions.ActionTypes.LOAD_SUCCESS)
+    .map(a => a.payload)
+    .map(lists => new taskActions.LoadAction(lists));
 
 
   constructor(

@@ -14,13 +14,13 @@
   >
     <app-task-header
       [header]="list.name"
-      (newTask)="openNewTaskDialog($event)"
+      (newTask)="openNewTaskDialog(list)"
       (editList)="openEditListDialog(list)"
-      (moveAll)="openCopyTaskDialog()"
+      (moveAll)="openCopyTaskDialog(list)"
       (delList)="openConfirmDialog(list)"
     ></app-task-header>
 
-    <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>
+    <app-quick-task (quickTask)="handleQuickTask($event, list)"></app-quick-task>
 
     <app-task-item
       *ngFor="let task of list.tasks"

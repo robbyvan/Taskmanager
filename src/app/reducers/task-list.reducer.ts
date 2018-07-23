@@ -26,7 +26,8 @@ const addTaskList = (state, action) => {
   }
   const newIds = [ ...state.ids, taskList.id ];
   const newEntities = { ...state.entities, [taskList.id]: taskList };
-  return { ...state, ids: newIds, entities: newEntities };
+  const newSelectedIds = [ ...state.selectedIds, taskList.id];
+  return { ...state, ids: newIds, entities: newEntities, selectedIds: newSelectedIds };
 };
 
 const updateTaskList = (state, action) => {
@@ -54,9 +55,9 @@ const loadTaskLists = (state, action) => {
   const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
 
   return {
-    ...state,
     ids: [ ...state.ids, ...newIds ],
     entities: { ...state.entities, ...newEntities },
+    selectedIds: incomingIds
   }
 };
 

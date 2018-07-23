@@ -45,7 +45,7 @@ export class TaskService {
       dueDate: task.dueDate,
       reminder: task.reminder,
       ownerId: task.ownerId,
-      participantIds: task.participantsIds,
+      participantsIds: task.participantsIds,
       remark: task.remark,
     };
     return this.http

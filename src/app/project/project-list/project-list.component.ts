@@ -77,8 +77,11 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       });
   }
 
-  openInviteDialog() {
-    const dialogRef = this.dialog.open(InviteComponent, { data: { members: [] }});
+  openInviteDialog(project: Project) {
+    this.store$.select(fromRoot.getProjectUsers(project.id))
+      .map(users => this.dialog.open(InviteComponent, { data: { members: users } }))
+      .switchMap(dialogRef => dialogRef.afterClosed().take(1).filter(n => n))
+      .subscribe(val => this.store$.dispatch(new projectActions.InviteAction({ projectId: project.id, members: val})));
   }
 
   openConfirmDialog(project) {
