@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { createSelector } from 'reselect';
 
 import * as actions from '../actions/user.action';
+import * as authActions from '../actions/auth.action';
 import * as projectActions from '../actions/project.action';
 import { Project } from '../domain/project.model';
 import { User } from '../domain/user.model';
@@ -74,6 +75,8 @@ export function reducer(state: State = initialState, action: actions.UserActions
     case actions.ActionTypes.LOAD_SUCCESS:
     case actions.ActionTypes.SEARCH_SUCCESS:
       return loadUsers(state, action);
+    case authActions.ActionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { createSelector } from 'reselect';
 
 import * as actions from '../actions/task.action';
+import * as authActions from '../actions/auth.action';
 import * as projectActions from '../actions/project.action';
 import { Project } from '../domain/project.model';
 import { TaskList } from '../domain/task-list.model';
@@ -94,6 +95,8 @@ export function reducer(state: State = initialState, action: actions.TaskActions
       return moveAllTasks(state, action);
     case projectActions.ActionTypes.DELETE_SUCCESS:
       return delTasksByProject(state, action);
+    case authActions.ActionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }

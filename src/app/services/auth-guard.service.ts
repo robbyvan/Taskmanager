@@ -17,7 +17,7 @@ export class AuthGuardService implements CanActivate {
       .select(fromRoot.getAuthState)
       .map(auth => {
         const result = auth.token !== null && auth.token !== undefined;
-        if (result) {
+        if (!result) {
           this.store$.dispatch(new routerActions.Go({ path: ['/login']}))
         }
         return result;

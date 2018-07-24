@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import { createSelector } from 'reselect';
+import * as authActions from '../actions/auth.action';
 
 import * as actions from '../actions/task-list.action';
 import * as projectActions from '../actions/project.action';
@@ -112,6 +113,8 @@ export function reducer(state: State = initialState, action: actions.TaskListAct
       return selectProject(state, action);
     case projectActions.ActionTypes.DELETE_SUCCESS:
       return delListsByProject(state, action);
+    case authActions.ActionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }

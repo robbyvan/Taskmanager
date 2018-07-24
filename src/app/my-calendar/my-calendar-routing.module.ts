@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskHomeComponent } from './task-home/task-home.component';
+import { CalendarHomeComponent } from './calendar-home/calendar-home.component';
 
 const routes: Routes = [
-  { path: '', component: TaskHomeComponent }
+  { path: '', component: CalendarHomeComponent }
 ];
 
 @NgModule({
@@ -11,4 +11,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class TaskRoutingModule {}
+export class MyCalendarRoutingModule {}

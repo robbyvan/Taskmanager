@@ -1,5 +1,6 @@
 import { Quote } from '../domain';
 import * as actions from '../actions/quote.action';
+import * as authActions from '../actions/auth.action';
 
 export interface State {
   quote: Quote;
@@ -18,6 +19,8 @@ export function reducer(state: State = initialState, action: actions.QuoteAction
     case actions.ActionTypes.LOAD_SUCCESS:
       return { ...state, quote: <Quote>action.payload };
     case actions.ActionTypes.LOAD_FAIL:
+    case authActions.ActionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }

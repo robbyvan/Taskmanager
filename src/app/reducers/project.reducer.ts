@@ -3,6 +3,7 @@ import { Project } from '../domain/project.model';
 import { User } from '../domain/user.model';
 import * as _ from 'lodash';
 import { createSelector } from 'reselect';
+import * as authActions from '../actions/auth.action';
 
 export interface State {
   ids: string[];
@@ -70,6 +71,8 @@ export function reducer(state: State = initialState, action: actions.ProjectActi
     case actions.ActionTypes.SELECT_PROJECT:
       const selectedProject = <Project>action.payload;
       return { ...state, selectedId: selectedProject.id };
+    case authActions.ActionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }
