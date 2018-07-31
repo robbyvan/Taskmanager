@@ -44,6 +44,8 @@ export const getUserState = (state: State) => state.users;
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 export const getProjects = createSelector(getProjectState, fromProject.getAll);
 export const getTaskLists = createSelector(getTaskListState, fromTaskList.getSelected);
+export const getTaskListEntities = createSelector(getTaskListState, fromTaskList.getEntities);
+export const getTaskListSelectedIds = createSelector(getTaskListState, fromTaskList.getSelectedIds);
 export const getTasks = createSelector(getTaskState, fromTask.getTasks);
 export const getUsers = createSelector(getUserState, fromUser.getUsers);
 export const getUserEntities = createSelector(getUserState, fromUser.getEntities);
@@ -51,10 +53,10 @@ export const getUserEntities = createSelector(getUserState, fromUser.getEntities
 export const getTasksWithOwners = createSelector(
   getTasks,
   getUserEntities,
-  (tasks, userEntities) => 
+  (tasks, userEntities) =>
     tasks.map(task =>  ({
-          ...task, 
-          owner: userEntities[task.ownerId], 
+          ...task,
+          owner: userEntities[task.ownerId],
           participants: task.participantsIds.map(id => userEntities[id]),
           })
     )
@@ -74,6 +76,16 @@ export const getProjectUsers = (projectId: string) =>
     getUserEntities,
     (state, entities) => state.entities[projectId].members.map(id => entities[id])
   );
+
+export const getMaxListOrder = createSelector(getTaskListEntities, getTaskListSelectedIds, (entities, ids) => {
+  console.log('selectedIds:', ids);
+  const orders: number[] = ids.map(id => entities[id].order);
+  if (orders.length < 1) {
+    return 0;
+  }
+  console.log('orders', orders.sort());
+  return orders.sort()[orders.length - 1];
+});
 
 export const reducers: ActionReducerMap<State> = {
   quote: fromQuote.reducer,

@@ -39,14 +39,20 @@ const delTask = (state, action) => {
   const task = (<actions.DeleteSuccessAction>action).payload;
   const newIds = state.ids.filter(id => id !== task.id);
   const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: state.entities[id] }), {});
-  
+
   return { ids: newIds, entities: newEntities };
 };
 
 const loadTasks = (state, action) => {
   const tasks = (<actions.LoadSuccessAction>action).payload;
+  if (tasks === null) {
+    return state;
+  }
   const incomingIds = tasks.map(p => p.id);
   const newIds = _.difference(incomingIds, state.ids);
+  if (newIds.length === 0) {
+    return state;
+  }
   const incomingEntities = _.chain(tasks)
     .keyBy('id')
     .mapValues(o => o)
@@ -70,7 +76,11 @@ const moveAllTasks = (state, action) => {
 
 const delTasksByProject = (state, action) => {
   const project = (<projectActions.DeleteSuccessAction>action).payload;
+  console.log('gonna delete proj: ', project);
   const taskListIds = project.taskLists;
+  if (!taskListIds) {
+    return state;
+  }
   const remainingIds = state.ids.filter(id => taskListIds.indexOf(state.entities[id].taskListId) === -1)
   const remainingEntities = remainingIds.reduce((entities, id) => ({ ...entities, [id]: state.entities[id] }), {});
   return {

@@ -42,8 +42,14 @@ const delProject = (state, action) => {
 
 const loadProjects = (state, action) => {
   const projects = (<actions.LoadSuccessAction>action).payload;
+  if (projects === null) {
+    return state;
+  }
   const incomingIds = projects.map(p => p.id);
   const newIds = _.difference(incomingIds, state.ids);
+  if (newIds.length === 0) {
+    return state;
+  }
   const incomingEntities = _.chain(projects)
     .keyBy('id')
     .mapValues(o => o)

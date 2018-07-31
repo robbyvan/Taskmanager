@@ -21,11 +21,14 @@ export const initialState: State = {
 };
 
 const addTaskList = (state, action) => {
+  console.log('gonna add list');
   const taskList = (<actions.AddSuccessAction>action).payload;
+  console.log('this is new', taskList);
   if (state.entities[taskList.id]) {
     return state;
   }
   const newIds = [ ...state.ids, taskList.id ];
+  console.log('gonna add list', newIds);
   const newEntities = { ...state.entities, [taskList.id]: taskList };
   const newSelectedIds = [ ...state.selectedIds, taskList.id];
   return { ...state, ids: newIds, entities: newEntities, selectedIds: newSelectedIds };
@@ -47,8 +50,14 @@ const delTaskList = (state, action) => {
 
 const loadTaskLists = (state, action) => {
   const taskLists = (<actions.LoadSuccessAction>action).payload;
+  if (taskLists === null) {
+    return state;
+  }
   const incomingIds = taskLists.map(p => p.id);
   const newIds = _.difference(incomingIds, state.ids);
+  if (newIds.length === 0) {
+    return state;
+  }
   const incomingEntities = _.chain(taskLists)
     .keyBy('id')
     .mapValues(o => o)
@@ -56,9 +65,9 @@ const loadTaskLists = (state, action) => {
   const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
 
   return {
+    ...state,
     ids: [ ...state.ids, ...newIds ],
     entities: { ...state.entities, ...newEntities },
-    selectedIds: incomingIds
   }
 };
 

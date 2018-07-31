@@ -65,7 +65,14 @@ export class TaskHomeComponent implements OnInit {
     const dialogRef = this.dialog.open(NewTaskListComponent, { data: { title: '新的任务列表' } });
     dialogRef.afterClosed()
       .take(1)
-      .withLatestFrom(this.projectId$, (val, projectId) => ({ ...val, projectId: projectId}))
+      .filter(n => n)
+      .withLatestFrom(this.store$.select(fromRoot.getMaxListOrder), (_n, _o) => {
+        return {
+          name: _n,
+          order: _o
+        }
+      })
+      .withLatestFrom(this.projectId$, (val, projectId) => ({ ...val, order: val.order + 1, projectId: projectId, taskIds: [] }))
       .subscribe(result => this.store$.dispatch(new taskListActions.AddAction(result)));
   }
 
@@ -94,21 +101,21 @@ export class TaskHomeComponent implements OnInit {
       .subscribe(result => this.store$.dispatch(new taskListActions.DeleteAction(list)));
   }
 
-  handleMove(srcData, list) {
+  handleMove(srcData, list: TaskList) {
     switch (srcData.tag) {
       case "task-item":
-        console.log('handling item');
+        this.store$.dispatch(new taskActions.MoveAction({ taskId: srcData.data.id, listId: list.id }));
         break;
       case "task-list":
-        console.log('handling list');
-        const srcList = srcData.data;
-        const tempOrder = srcList.order;
-        srcList.order = list.order;
-        list.order = tempOrder;
+        this.store$.dispatch(new taskListActions.SwapAction({ src: srcData.data, target: list }));
         break;
       default:
         break;
     }
+  }
+
+  handleCompleteTask(task) {
+    this.store$.dispatch(new taskActions.CompleteAction(task));
   }
 
   handleQuickTask(desc: string, list) {

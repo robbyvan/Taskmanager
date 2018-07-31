@@ -31,7 +31,7 @@ export class AuthEffects {
     );
 
   @Effect()
-  logout: Observable<Action> = this.actions$
+  logout$: Observable<Action> = this.actions$
     .ofType<AuthActions>(authActions.ActionTypes.LOGOUT)
     .map(_ => new routerActions.Go({ path: ['/'] }));
 

@@ -19,6 +19,7 @@ export class TaskListEffects {
   loadTaskLists$: Observable<Action> = this.actions$
     .ofType<taskListActions.LoadAction>(taskListActions.ActionTypes.LOAD)
     .map(a => a.payload)
+    .do(v => console.log('load this: ', v))
     .switchMap((projectId) => this.service$.get(projectId)
       .map(taskLists => new taskListActions.LoadSuccessAction(taskLists))
       .catch(err => of(new taskListActions.LoadFailAction(JSON.stringify(err))))
@@ -61,9 +62,10 @@ export class TaskListEffects {
     );
 
   @Effect()
-  what$: Observable<Action> = this.actions$
+  loadTasksInList$: Observable<Action> = this.actions$
     .ofType<taskListActions.LoadSuccessAction>(taskListActions.ActionTypes.LOAD_SUCCESS)
     .map(a => a.payload)
+    .do(v => console.log('gonna load tasks: ', v))
     .map(lists => new taskActions.LoadAction(lists));
 
 

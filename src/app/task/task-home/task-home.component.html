@@ -26,6 +26,7 @@
       *ngFor="let task of list.tasks"
       [item]="task"
       (taskClick)="openTaskClickDialog(task)"
+      (taskComplete)="handleCompleteTask(task)"
     >
     </app-task-item>
   </app-task-list>

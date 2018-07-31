@@ -15,6 +15,7 @@ export class TaskItemComponent implements OnInit {
   @Input() item;
   @Input() avatar;
   @Output() taskClick = new EventEmitter<void>();
+  @Output() taskComplete = new EventEmitter();
 
   widerPriority = 'out';
 
@@ -40,6 +41,8 @@ export class TaskItemComponent implements OnInit {
 
   onCheckBoxClick(e: Event) {
     e.stopPropagation();
+    this.taskComplete.emit();
+    console.log('emit complete');
   }
 
 }

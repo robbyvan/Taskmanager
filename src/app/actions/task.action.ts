@@ -118,7 +118,7 @@ export class MoveAllFailAction implements Action {
 }
 
 export class CompleteAction implements Action {
-  type = ActionTypes.MOVE_ALL;
+  type = ActionTypes.COMPLETE;
   constructor(public payload: Task) { }
 }
 export class CompleteSuccessAction implements Action {
@@ -130,13 +130,13 @@ export class CompleteFailAction implements Action {
   constructor(public payload: string) { }
 }
 
-export type TaskActions 
+export type TaskActions
   = LoadAction
   | LoadSuccessAction
   | LoadFailAction
   | AddAction
   | AddSuccessAction
-  | AddFailAction 
+  | AddFailAction
   | UpdateAction
   | UpdateSuccessAction
   | UpdateFailAction

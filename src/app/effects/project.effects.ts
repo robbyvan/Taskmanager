@@ -75,6 +75,7 @@ export class ProjectEffects {
   loadTaskList$: Observable<Action> = this.actions$
     .ofType<projectActions.SelectAction>(projectActions.ActionTypes.SELECT_PROJECT)
     .map(a => a.payload)
+    .do(v => console.log('gonna load lists of project: ', v))
     .map(project => new taskListActions.LoadAction(project.id));
 
   @Effect()

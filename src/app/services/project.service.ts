@@ -5,7 +5,6 @@ import { User } from '../domain/user.model';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 
-
 @Injectable()
 export class ProjectService {
   private readonly domain = 'projects';

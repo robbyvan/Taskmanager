@@ -57,11 +57,12 @@ export class TaskListService {
     const drag$ = this.http
       .patch(dragUri, JSON.stringify({ order: target.order }), { headers: this.headers })
       .map(res => res.json());
+
     const drop$ = this.http
-      .patch(dragUri, JSON.stringify({ order: src.order }), { headers: this.headers })
+      .patch(dropUri, JSON.stringify({ order: src.order }), { headers: this.headers })
       .map(res => res.json());
-    const concat$: Observable<any> = null;
-    concat(drag$, drop$, concat$);
+
+    const concat$ = concat(drag$, drop$);
     return concat$.reduce((arrs, list) => [...arrs, list], []);
   }
 

@@ -1,4 +1,4 @@
-<form formGroup="form" (ngSubmit)="onSubmit($event, form)">
+<form [formGroup]="form" (ngSubmit)="onSubmit($event, form)">
   <h2 mat-dialog-title>移动当前列表所有任务</h2>
   <div mat-dialog-content>
     <mat-select placeholder="请选择目标列表" formControlName="targetListId">

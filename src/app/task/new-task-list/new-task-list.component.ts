@@ -24,15 +24,15 @@ export class NewTaskListComponent implements OnInit {
     });
   }
 
-  onClick() {
-    this.dialogRef.close(this.title);
-  }
+  // onClick() {
+  //   this.dialogRef.close(this.title);
+  // }
 
   onSubmit({ value, valid }) {
     if (!valid) {
       return;
     }
-    this.dialogRef.close(value);
+    this.dialogRef.close(value.name);
   }
 
 }

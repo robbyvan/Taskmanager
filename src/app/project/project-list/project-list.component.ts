@@ -57,7 +57,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .take(1)
       .filter(n => n)
-      .map(val => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) }))
+      .map(val => ({ ...val, coverImg: this.buildImgSrc(val.coverImg), taskLists: [] }))
       .subscribe(p => {
         this.store$.dispatch(new projectActions.AddAction(p));
       });
@@ -87,7 +87,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   openConfirmDialog(project) {
     const dialogRef = this.dialog.open(
       ConfirmDialogComponent,
-      { data: {title: '删除项目', content: '确认删除此项目吗?'} 
+      { data: {title: '删除项目', content: '确认删除此项目吗?'}
     });
     dialogRef.afterClosed()
       .take(1)
@@ -105,5 +105,5 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   private buildImgSrc(img: string): string {
     return img.indexOf('_') !== -1 ? img.split('_')[0] + '.jpg' : img;
   }
-  
+
 }

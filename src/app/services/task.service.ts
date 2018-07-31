@@ -69,7 +69,7 @@ export class TaskService {
       .map(res => res.json());
   }
 
-  move(taskId: string, taskListId: string): Observable<Task> {
+  moveTask(taskId: string, taskListId: string): Observable<Task> {
     const uri = `${this.config.uri}/${this.domain}/${taskId}`;
     return this.http
       .patch(uri, JSON.stringify({ taskListId: taskListId }), { headers:  this.headers })
@@ -79,7 +79,7 @@ export class TaskService {
   moveAll(srcListId: string, targetListId: string): Observable<Task[]> {
     return this.get(srcListId)
       .mergeMap(tasks => Observable.from(tasks))
-      .mergeMap(task => this.move(task.id, targetListId))
+      .mergeMap(task => this.moveTask(task.id, targetListId))
       .reduce((arr, x) => [ ...arr, x ], []);
   }
 

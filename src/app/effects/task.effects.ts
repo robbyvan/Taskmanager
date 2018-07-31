@@ -18,6 +18,7 @@ export class TaskEffects {
     .ofType<taskActions.LoadAction>(taskActions.ActionTypes.LOAD)
     .map(a => a.payload)
     .switchMap((taskLists) => this.service$.getByLists(taskLists)
+      .do(v => console.log('got tasks: ', v))
       .map(tasks => new taskActions.LoadSuccessAction(tasks))
       .catch(err => of(new taskActions.LoadFailAction(JSON.stringify(err))))
     );
@@ -53,7 +54,8 @@ export class TaskEffects {
   complete$: Observable<Action> = this.actions$
     .ofType<taskActions.CompleteAction>(taskActions.ActionTypes.COMPLETE)
     .map(a => a.payload)
-    .switchMap((task) => this.service$.del(task)
+    .do(v => console.log('complete', v))
+    .switchMap((task) => this.service$.complete(task)
         .map(t => new taskActions.CompleteSuccessAction(t))
         .catch(err => of(new taskActions.CompleteFailAction(JSON.stringify(err))))
     );
@@ -62,7 +64,7 @@ export class TaskEffects {
   move$: Observable<Action> = this.actions$
     .ofType<taskActions.MoveAction>(taskActions.ActionTypes.MOVE)
     .map(a => a.payload)
-    .switchMap(({ taskId, listId }) => this.service$.move(taskId, listId)
+    .switchMap(({ taskId, listId }) => this.service$.moveTask(taskId, listId)
         .map(task => new taskActions.MoveSuccessAction(task))
         .catch(err => of(new taskActions.MoveFailAction(JSON.stringify(err))))
     );
