@@ -48,21 +48,29 @@ const loadTasks = (state, action) => {
   if (tasks === null) {
     return state;
   }
-  const incomingIds = tasks.map(p => p.id);
-  const newIds = _.difference(incomingIds, state.ids);
-  if (newIds.length === 0) {
-    return state;
-  }
-  const incomingEntities = _.chain(tasks)
-    .keyBy('id')
-    .mapValues(o => o)
-    .value();
-  const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
 
+  const ids = tasks.reduce((result, task) => [ ...result, task.id ], []);
+  const entities = tasks.reduce((result, task) => ({ ...result, [task.id]: task }) , {});
   return {
-    ids: [ ...state.ids, ...newIds ],
-    entities: { ...state.entities, ...newEntities },
-  }
+    ids,
+    entities,
+  };
+
+  // const incomingIds = tasks.map(p => p.id);
+  // const newIds = _.difference(incomingIds, state.ids);
+  // if (newIds.length === 0) {
+  //   return state;
+  // }
+  // const incomingEntities = _.chain(tasks)
+  //   .keyBy('id')
+  //   .mapValues(o => o)
+  //   .value();
+  // const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
+
+  // return {
+  //   ids: [ ...state.ids, ...newIds ],
+  //   entities: { ...state.entities, ...newEntities },
+  // }
 };
 
 const moveAllTasks = (state, action) => {

@@ -45,22 +45,31 @@ const loadProjects = (state, action) => {
   if (projects === null) {
     return state;
   }
-  const incomingIds = projects.map(p => p.id);
-  const newIds = _.difference(incomingIds, state.ids);
-  if (newIds.length === 0) {
-    return state;
-  }
-  const incomingEntities = _.chain(projects)
-    .keyBy('id')
-    .mapValues(o => o)
-    .value();
-  const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
 
+  const ids = projects.reduce((result, project) => [ ...result, project.id ], []);
+  const entities = projects.reduce((result, project) => ({ ...result, [project.id]: project }) , {});
   return {
-    ids: [ ...state.ids, ...newIds ],
-    entities: { ...state.entities, ...newEntities },
+    ids,
+    entities,
     selectedId: null
-  }
+  };
+
+  // const incomingIds = projects.map(p => p.id);
+  // const newIds = _.difference(incomingIds, state.ids);
+  // if (newIds.length === 0) {
+  //   return state;
+  // }
+  // const incomingEntities = _.chain(projects)
+  //   .keyBy('id')
+  //   .mapValues(o => o)
+  //   .value();
+  // const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
+
+  // return {
+  //   ids: [ ...state.ids, ...newIds ],
+  //   entities: { ...state.entities, ...newEntities },
+  //   selectedId: null
+  // }
 };
 
 export function reducer(state: State = initialState, action: actions.ProjectActions ): State {

@@ -53,22 +53,31 @@ const loadTaskLists = (state, action) => {
   if (taskLists === null) {
     return state;
   }
-  const incomingIds = taskLists.map(p => p.id);
-  const newIds = _.difference(incomingIds, state.ids);
-  if (newIds.length === 0) {
-    return state;
-  }
-  const incomingEntities = _.chain(taskLists)
-    .keyBy('id')
-    .mapValues(o => o)
-    .value();
-  const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
 
+  const ids = taskLists.reduce((result, taskList) => [ ...result, taskList.id ], []);
+  const entities = taskLists.reduce((result, taskList) => ({ ...result, [taskList.id]: taskList }) , {});
   return {
     ...state,
-    ids: [ ...state.ids, ...newIds ],
-    entities: { ...state.entities, ...newEntities },
-  }
+    ids,
+    entities,
+  };
+
+  // const incomingIds = taskLists.map(p => p.id);
+  // const newIds = _.difference(incomingIds, state.ids);
+  // if (newIds.length === 0) {
+  //   return state;
+  // }
+  // const incomingEntities = _.chain(taskLists)
+  //   .keyBy('id')
+  //   .mapValues(o => o)
+  //   .value();
+  // const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntities[id] }), {});
+
+  // return {
+  //   ...state,
+  //   ids: [ ...state.ids, ...newIds ],
+  //   entities: { ...state.entities, ...newEntities },
+  // }
 };
 
 const swapTaskList = (state, action) => {
