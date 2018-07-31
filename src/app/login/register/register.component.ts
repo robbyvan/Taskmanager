@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
 import { getAddrByCode, isValidAddr, extractInfo } from '../../utils/identity.util';
@@ -33,12 +33,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.avatars = nums.map(num => `avatars:svg-${num}`);
 
     this.registerForm = this.fb.group({
-      email: [],
-      name: [],
-      password: [],
-      confirmpassword: [],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      name: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.required])],
+      confirmpassword: ['', Validators.compose([Validators.required])],
       avatar: [img],
-      dateOfBirth: ['1990-01-01'],
+      dateOfBirth: ['2016-01-01'],
       address: [],
       identity: [],
     });

@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     //   password: new FormControl('', Validators.required),
     // });
     this.loginForm = this.fb.group({
-      email: ['admin@admin.com', Validators.compose([Validators.required, Validators.email, this.validate])],
-      password: ['admin', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email, this.validate])],
+      password: ['', Validators.required],
     });
   }
 
@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
   }
 
   validate(fc: FormControl): {[key: string]: any} {
-    // if (!fc.value) {
+    if (!fc.value) {
       return null;
-    // }
+    }
     // const pattern = /^van+/;
     // if (pattern.test(fc.value)) {
     //   return null;

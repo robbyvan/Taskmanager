@@ -4,7 +4,7 @@
       <mat-tab label="账号信息">
         <mat-card-header>
           <mat-card-title>新账户</mat-card-title>
-        </mat-card-header>  
+        </mat-card-header>
         <mat-card-content>
           <mat-form-field color="accent" class="full-width">
             <input matInput type="text" placeholder="邮箱地址" formControlName="email" />
@@ -17,7 +17,7 @@
           <mat-form-field color="accent" class="full-width">
             <input matInput type="text" placeholder="密码" formControlName="password" />
           </mat-form-field>
-      
+
           <mat-form-field color="accent" class="full-width">
             <input matInput type="text" placeholder="确认密码" formControlName="confirmpassword" />
           </mat-form-field>
@@ -29,7 +29,7 @@
             [items]="avatars"
             formControlName="avatar"
           ></app-image-list-select>
-          <button mat-raised-button type="button" color="accent" type="submit">注册</button>
+          <button mat-raised-button type="button" color="accent" type="submit" [disabled]="!registerForm.valid">注册</button>
         </mat-card-content>
       </mat-tab>
 

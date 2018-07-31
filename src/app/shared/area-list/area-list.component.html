@@ -1,5 +1,5 @@
 <div class="address-group">
-  <div>
+  <div class="address-option">
     <mat-select
       placeholder="请选择省份"
       [(ngModel)]="_address.province"
@@ -11,7 +11,7 @@
     </mat-select>
   </div>
 
-  <div>
+  <div class="address-option">
     <mat-select
       placeholder="请选择城市"
       [(ngModel)]="_address.city"
@@ -23,7 +23,7 @@
     </mat-select>
   </div>
 
-  <div>
+  <div class="address-option">
     <mat-select
       placeholder="请选择区县"
       [(ngModel)]="_address.district"
@@ -37,7 +37,7 @@
 
   <div>
     <mat-form-field class="full-width">
-      <input 
+      <input
         matInput
         type="text"
         placeholder="请输入街道地址"

@@ -1,10 +1,15 @@
-.street{
+.street {
   flex: 1 1 100%;
 }
-.address-group{
+.address-group {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
+}
+
+.address-option {
+  width: 30%;
 }
