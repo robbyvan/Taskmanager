@@ -1,9 +1,11 @@
-import * as actions from '../actions/project.action';
+import * as _ from 'lodash';
+
 import { Project } from '../domain/project.model';
 import { User } from '../domain/user.model';
-import * as _ from 'lodash';
 import { createSelector } from 'reselect';
+import * as actions from '../actions/project.action';
 import * as authActions from '../actions/auth.action';
+import * as taskListActions from '../actions/task-list.action';
 
 export interface State {
   ids: string[];
@@ -72,12 +74,23 @@ const loadProjects = (state, action) => {
   // }
 };
 
+// const addListToProject = (state, action) => {
+//   const taskList = (<taskListActions.AddAction>action).payload;
+//   const targetProject = state.entities[state.selectedId];
+//   const updatedProjectEntity = { ...targetProject, taskLists: [...targetProject.taskLists, taskList.id ] }
+//   const newEntities = { ...state.entities, [targetProject.id]: updatedProjectEntity  }
+
+//   return { ...state, entities: newEntities };
+// };
+
 export function reducer(state: State = initialState, action: actions.ProjectActions ): State {
   switch (action.type) {
     case actions.ActionTypes.ADD_SUCCESS:
       return addProject(state, action);
     case actions.ActionTypes.UPDATE_SUCCESS:
     case actions.ActionTypes.INVITE_SUCCESS:
+    case actions.ActionTypes.ADD_LIST_TO_PROJECT_SUCCESS:
+    case actions.ActionTypes.DELETE_LIST_FROM_PROJECT_SUCCESS:
       return updateProject(state, action);
     case actions.ActionTypes.DELETE_SUCCESS:
       return delProject(state, action);
@@ -98,3 +111,4 @@ export const getEntities = (state: State) => state.entities;
 export const getSelectedId = (state: State) => state.selectedId;
 
 export const getAll = createSelector(getIds, getEntities, (ids, entities) => ids.map(id => entities[id]));
+export const getSelectedProject = createSelector(getSelectedId, getEntities, (id, entities) => entities[id]);

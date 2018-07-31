@@ -8,6 +8,6 @@
   </button>
   <span>企业协作平台</span>
   <span class="fill-remaining-space"></span>
-  <mat-slide-toggle (change)="onThemeChange($event)">Night Mode</mat-slide-toggle>
+  <mat-slide-toggle (change)="onThemeChange($event)">夜间模式</mat-slide-toggle>
   <span><a mat-button *ngIf="(auth$ | async)?.token" (click)="logout()">退出登录</a></span>
 </mat-toolbar>

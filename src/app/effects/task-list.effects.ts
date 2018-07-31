@@ -5,10 +5,12 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import * as routerActions from '../actions/router.action';
+import * as projectActions from '../actions/project.action';
 import * as taskListActions from '../actions/task-list.action';
 import * as taskActions from '../actions/task.action';
 
 import { TaskListService } from '../services/task-list.service';
+import { ProjectService } from '../services/project.service';
 import { User } from '../domain/user.model';
 import { TaskList } from '../domain/task-list.model';
 
@@ -35,6 +37,12 @@ export class TaskListEffects {
     );
 
   @Effect()
+  addListRefToProject$: Observable<Action> = this.actions$
+    .ofType<taskListActions.AddSuccessAction>(taskListActions.ActionTypes.ADD_SUCCESS)
+    .map(a => a.payload)
+    .map(tl => new projectActions.AddListToProjectAction(tl));
+
+  @Effect()
   updateTaskLists$: Observable<Action> = this.actions$
     .ofType<taskListActions.UpdateAction>(taskListActions.ActionTypes.UPDATE)
     .map(a => a.payload)
@@ -51,6 +59,12 @@ export class TaskListEffects {
         .map(tl => new taskListActions.DeleteSuccessAction(tl))
         .catch(err => of(new taskListActions.DeleteFailAction(JSON.stringify(err))))
     );
+
+  @Effect()
+  delListRefFromProject$: Observable<Action> = this.actions$
+    .ofType<taskListActions.DeleteAction>(taskListActions.ActionTypes.DELETE)
+    .map(a => a.payload)
+    .map(tl => new projectActions.DeleteListFromProjectAction(tl));
 
   @Effect()
   swap$: Observable<Action> = this.actions$

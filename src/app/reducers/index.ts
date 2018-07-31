@@ -43,6 +43,7 @@ export const getUserState = (state: State) => state.users;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 export const getProjects = createSelector(getProjectState, fromProject.getAll);
+export const getSelectedProject = createSelector(getProjectState, fromProject.getSelectedProject);
 export const getTaskLists = createSelector(getTaskListState, fromTaskList.getSelected);
 export const getTaskListEntities = createSelector(getTaskListState, fromTaskList.getEntities);
 export const getTaskListSelectedIds = createSelector(getTaskListState, fromTaskList.getSelectedIds);

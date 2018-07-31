@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Project } from '../domain/project.model';
+import { TaskList } from '../domain/task-list.model';
 import { User } from '../domain/user.model';
 import { type } from '../utils/type.util';
 
@@ -19,7 +20,13 @@ export const ActionTypes = {
   INVITE: type('[Project] Invite'),
   INVITE_SUCCESS: type('[Project] Invite success'),
   INVITE_FAIL: type('[Project] Invite fail'),
-  SELECT_PROJECT: type('[Project] Select Project')
+  SELECT_PROJECT: type('[Project] Select Project'),
+  ADD_LIST_TO_PROJECT: type('[Add List To Project] Update tasklist refs under selected project'),
+  ADD_LIST_TO_PROJECT_SUCCESS: type('[Add List To Project Success] Update tasklist refs under selected project Success'),
+  ADD_LIST_TO_PROJECT_FAIL: type('[Add List To Project Fail] Update tasklist refs under selected project Fail'),
+  DELETE_LIST_FROM_PROJECT: type('[Delete List From Project] Update tasklist refs under selected project'),
+  DELETE_LIST_FROM_PROJECT_SUCCESS: type('[Delete List From Project Success] Update tasklist refs under selected project Success'),
+  DELETE_LIST_FROM_PROJECT_FAIL: type('[Delete List From Project Fail] Update tasklist refs under selected project Fail'),
 };
 
 export class LoadAction implements Action {
@@ -102,10 +109,40 @@ export class SelectAction implements Action {
   constructor(public payload: Project) { }
 }
 
-export type ProjectActions 
+export class AddListToProjectAction implements Action {
+  type = ActionTypes.ADD_LIST_TO_PROJECT;
+  constructor(public payload: TaskList) { }
+}
+
+export class AddListToProjectSuccessAction implements Action {
+  type = ActionTypes.ADD_LIST_TO_PROJECT_SUCCESS;
+  constructor(public payload: Project) { }
+}
+
+export class AddListToProjectFailAction implements Action {
+  type = ActionTypes.ADD_LIST_TO_PROJECT_FAIL;
+  constructor(public payload: string) { }
+}
+
+export class DeleteListFromProjectAction implements Action {
+  type = ActionTypes.DELETE_LIST_FROM_PROJECT;
+  constructor(public payload: TaskList) { }
+}
+
+export class DeleteListFromProjectSuccessAction implements Action {
+  type = ActionTypes.DELETE_LIST_FROM_PROJECT_SUCCESS;
+  constructor(public payload: Project) { }
+}
+
+export class DeleteListFromProjectFailAction implements Action {
+  type = ActionTypes.DELETE_LIST_FROM_PROJECT_FAIL;
+  constructor(public payload: string) { }
+}
+
+export type ProjectActions
   = AddAction
   | AddSuccessAction
-  | AddFailAction 
+  | AddFailAction
   | UpdateAction
   | UpdateSuccessAction
   | UpdateFailAction
@@ -118,4 +155,11 @@ export type ProjectActions
   | SelectAction
   | LoadAction
   | LoadSuccessAction
-  | LoadFailAction;
+  | LoadFailAction
+  | AddListToProjectAction
+  | AddListToProjectSuccessAction
+  | AddListToProjectFailAction
+  | DeleteListFromProjectAction
+  | DeleteListFromProjectSuccessAction
+  | DeleteListFromProjectFailAction
+  ;

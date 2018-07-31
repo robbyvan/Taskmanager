@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Project } from '../domain/project.model';
+import { TaskList } from '../domain/task-list.model';
 import { User } from '../domain/user.model';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
@@ -31,7 +32,7 @@ export class ProjectService {
       .map(res => res.json());
   }
 
-  // PUT
+  // PATCH
   update(project: Project): Observable<Project> {
     const uri = `${this.config.uri}/${this.domain}/${project.id}`;
     const toUpdate = {
@@ -44,12 +45,36 @@ export class ProjectService {
       .map(res => res.json());
   }
 
+  // PATCH: update taskLists
+  addListToProject(project: Project, taskList: TaskList): Observable<Project> {
+    const uri = `${this.config.uri}/${this.domain}/${project.id}`;
+    const toUpdate = {
+      taskLists: [ ...project.taskLists, taskList.id]
+    };
+    return this.http
+      .patch(uri, JSON.stringify(toUpdate), { headers:  this.headers })
+      .map(res => res.json())
+      .do(v => console.log('what i returned: ', v));
+  }
+
+  //
+  delListFromProject(project: Project, taskList: TaskList): Observable<Project> {
+    const uri = `${this.config.uri}/${this.domain}/${project.id}`;
+    const toUpdate = {
+      taskLists: project.taskLists.filter(tl => tl !== taskList.id)
+    };
+    return this.http
+      .patch(uri, JSON.stringify(toUpdate), { headers:  this.headers })
+      .map(res => res.json())
+      .do(v => console.log('what i returned: ', v));
+  }
+
   // DELETE
   del(project: Project): Observable<Project> {
-    const delTask$ = Observable.from(project.taskLists ? project.taskLists : [])
-      .mergeMap(listId => this.http.delete(`${this.config.uri}/taskLists/${listId}`))
+    const delTaskList$ = Observable.from(project.taskLists ? project.taskLists : [])
+      .mergeMap(listId => this.http.delete(`${this.config.uri}/taskList/${listId}`))
       .count();
-    return delTask$
+    return delTaskList$
       .switchMap(_ => this.http.delete(`${this.config.uri}/${this.domain}/${project.id}`))
       .mapTo(project);
   }

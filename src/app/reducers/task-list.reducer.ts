@@ -21,14 +21,11 @@ export const initialState: State = {
 };
 
 const addTaskList = (state, action) => {
-  console.log('gonna add list');
   const taskList = (<actions.AddSuccessAction>action).payload;
-  console.log('this is new', taskList);
   if (state.entities[taskList.id]) {
     return state;
   }
   const newIds = [ ...state.ids, taskList.id ];
-  console.log('gonna add list', newIds);
   const newEntities = { ...state.entities, [taskList.id]: taskList };
   const newSelectedIds = [ ...state.selectedIds, taskList.id];
   return { ...state, ids: newIds, entities: newEntities, selectedIds: newSelectedIds };

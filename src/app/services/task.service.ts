@@ -55,7 +55,7 @@ export class TaskService {
 
   // DELETE
   del(task: Task): Observable<Task> {
-    const uri = `${this.config.uri}/taskLists/${task.id}`;
+    const uri = `${this.config.uri}/${this.domain}/${task.id}`;
     return this.http
       .delete(uri)
       .mapTo(task);
