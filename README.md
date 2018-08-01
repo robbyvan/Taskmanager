@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
+## Demo
+
+### 登录/注册页
+![](./demo-gif/login.gif)
+
+### 项目/任务页
+![](./demo-gif/project.gif)
+
 ## 运行
 ```
   yarn        # 安装dependencies
@@ -199,10 +207,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     └── user.model.ts
 ```
 
-## Demo
 
-### 登录/注册页
-![](./demo-gif/login.gif)
-
-### 项目/任务页
-![](./demo-gif/project.gif)
